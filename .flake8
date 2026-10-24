@@ -1,0 +1,18 @@
+[flake8]
+max-line-length = 120
+extend-ignore = E203, W503
+exclude =
+    .git,
+    .venv,
+    venv,
+    env,
+    __pycache__,
+    */migrations/*,
+    node_modules,
+    frontend-react,
+    FlagshipRouter,
+    media,
+    staticfiles,
+    logs,
+    dist,
+    .next

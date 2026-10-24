@@ -1,0 +1,9 @@
+region,revenue,units,quarter
+North,120000,400,Q1
+South,80000,250,Q1
+East,60000,180,Q2
+West,155000,520,Q2
+North,98000,310,Q3
+South,132000,410,Q3
+East,74000,220,Q4
+West,88000,260,Q4

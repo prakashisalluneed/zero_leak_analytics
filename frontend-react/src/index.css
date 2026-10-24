@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Zero Leak Analytics — "Sealed Instrument"
+
+   The subject is contained analysis: data that cannot cross a boundary. The
+   interface is an instrument, not a marketing surface. Chrome stays quiet and
+   cool; the data (charts, tables, numbers) carries the weight.
+
+   One superfamily in three roles: Plex Sans for the interface, Plex Mono for
+   anything numeric or structural, Plex Serif for the landing headline and the
+   analyst's written answers.
+--------------------------------------------------------------------------- */
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, serif;
+
+  /* Mineral paper and chrome */
+  --color-paper: #f4f6f5;
+  --color-paper-raised: #fbfcfb;
+  --color-ink: #101a20;
+  --color-ink-soft: #3d4b54;
+  --color-ink-muted: #6b7a83;
+  --color-hairline: #dbe2e0;
+  --color-hairline-soft: #e8edeb;
+
+  /* The seal: the single live accent */
+  --color-seal: #1f6f5c;
+  --color-seal-bright: #2a8a73;
+  --color-seal-wash: #e6f0ec;
+
+  /* Amber is reserved for limits, warnings, and truncation */
+  --color-limit: #9a6410;
+  --color-limit-wash: #fbf2e2;
+
+  --color-alarm: #a8372c;
+  --color-alarm-wash: #fbebe9;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Tabular figures everywhere numbers are compared in a column. */
+  .font-mono {
+    font-feature-settings: "tnum" 1, "zero" 1;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-seal);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-seal-wash);
+    color: var(--color-ink);
+  }
+
+  /* Understated scrollbars so the chrome recedes. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c6d2ce transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #c6d2ce;
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #a9b8b3;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  /* A hairline that reads as a rule rather than a border. */
+  .rule-b {
+    box-shadow: inset 0 -1px 0 var(--color-hairline);
+  }
+
+  .rule-t {
+    box-shadow: inset 0 1px 0 var(--color-hairline);
+  }
+
+  /* The seal ring: used once, in the landing hero diagram. */
+  .seal-ring {
+    background-image: radial-gradient(
+      circle at center,
+      transparent 0 38%,
+      var(--color-hairline) 38% 38.4%,
+      transparent 38.4% 62%,
+      var(--color-hairline) 62% 62.4%,
+      transparent 62.4%
+    );
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion. Only transitions that answer an action, plus one page-load reveal on
+   the landing hero. Everything collapses under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+@keyframes zla-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zla-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zla-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes zla-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.rise {
+  animation: zla-rise 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.fade {
+  animation: zla-fade 260ms ease-out both;
+}
+
+/* A thin travelling highlight marking "work in progress" — the only looping
+   animation in the product, and it appears only while a task is running. */
+.sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-seal) 12%, transparent),
+    transparent
+  );
+  animation: zla-sweep 1.5s ease-in-out infinite;
+}
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: zla-caret 900ms steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,192 @@
+[11/Oct/2026 22:21:49] "GET / HTTP/1.1" 200 793
+[11/Oct/2026 22:21:49] "GET /api/health/ HTTP/1.1" 200 16
+[2026-10-11 22:21:49,701] WARNING django.request 30196/21444 Unauthorized: /api/datasets/
+[11/Oct/2026 22:21:49] "GET /api/datasets/ HTTP/1.1" 401 58
+[11/Oct/2026 22:21:49] "GET /whatever/route HTTP/1.1" 200 793
+[11/Oct/2026 22:21:49] "GET / HTTP/1.1" 200 793
+[11/Oct/2026 22:21:50] "GET /assets/index-C2ICLTPY.js HTTP/1.1" 200 253035
+[11/Oct/2026 22:21:50] "GET /api/health/ HTTP/1.1" 200 16
+[11/Oct/2026 22:21:50,215] - Broken pipe from ('127.0.0.1', 50677)
+[2026-10-11 22:22:00,262] WARNING django.request 30196/2028 Unauthorized: /api/auth/login/
+[11/Oct/2026 22:22:00] "POST /api/auth/login/ HTTP/1.1" 401 63
+[11/Oct/2026 22:22:00,331] - Broken pipe from ('127.0.0.1', 50680)
+[11/Oct/2026 22:22:23] "GET / HTTP/1.1" 200 793
+[11/Oct/2026 22:22:23] "GET /assets/index-C2ICLTPY.js HTTP/1.1" 200 253035
+[11/Oct/2026 22:22:23] "GET /assets/index-DUA47tGa.css HTTP/1.1" 200 25653
+[11/Oct/2026 22:22:23] "GET /assets/index-DUA47tGa.css HTTP/1.1" 304 0
+[11/Oct/2026 22:22:23] "GET /favicon.svg HTTP/1.1" 200 9522
+[11/Oct/2026 22:22:40] "GET / HTTP/1.1" 200 793
+[11/Oct/2026 22:22:40] "GET /assets/index-DUA47tGa.css HTTP/1.1" 200 25653
+[11/Oct/2026 22:22:40] "GET /assets/index-C2ICLTPY.js HTTP/1.1" 200 253035
+[11/Oct/2026 22:22:40] "GET /favicon.svg HTTP/1.1" 200 9522
+[2026-10-11 22:23:13,858] WARNING django.request 30196/27368 Unauthorized: /api/auth/login/
+[11/Oct/2026 22:23:13] "POST /api/auth/login/ HTTP/1.1" 401 63
+[2026-10-11 22:32:41,422] WARNING django.request 30196/22796 Unauthorized: /api/auth/login/
+[11/Oct/2026 22:32:41] "POST /api/auth/login/ HTTP/1.1" 401 63
+[2026-10-11 22:32:50,561] WARNING django.request 30196/22796 Unauthorized: /api/auth/login/
+[11/Oct/2026 22:32:50] "POST /api/auth/login/ HTTP/1.1" 401 63
+[11/Oct/2026 22:33:02] "POST /api/auth/login/ HTTP/1.1" 200 489
+[11/Oct/2026 22:33:02] "GET /api/datasets/ HTTP/1.1" 200 16
+[11/Oct/2026 22:33:08] "GET /api/datasets/ HTTP/1.1" 200 16
+[2026-10-11 22:33:17,014] INFO analytics.views 30196/22796 dataset.uploaded dataset=11 user=2 file=industry.csv
+[11/Oct/2026 22:33:17] "POST /api/datasets/ HTTP/1.1" 201 75
+[11/Oct/2026 22:33:17] "GET /api/datasets/ HTTP/1.1" 200 50
+[2026-10-11 22:33:25,828] WARNING kombu.connection 30196/22796 No hostname was supplied. Reverting to default 'localhost'
+[2026-10-11 22:33:25,834] INFO analytics.tasks 30196/22796 analysis.start task=088bb3e6-fa99-4ed5-934b-60115d06fa1f dataset=11 user=2 question='HOW MANY ROWS'
+[2026-10-11 22:33:25,911] INFO analytics.tasks 30196/22796 analysis.data_loaded task=088bb3e6-fa99-4ed5-934b-60115d06fa1f rows=43 cols=1 elapsed=0.054s
+[2026-10-11 22:34:01,743] INFO httpx 30196/22796 HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+[2026-10-11 22:34:01,768] ERROR analytics.tasks 30196/22796 analysis.crashed task=088bb3e6-fa99-4ed5-934b-60115d06fa1f dataset=11 error=llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed
+CUDA error (status code: 500) elapsed=35.934s
+Traceback (most recent call last):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\tasks.py", line 73, in run_dataset_analysis
+    raw_code = llm.invoke(
+               ^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 384, in invoke
+    self.generate_prompt(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 801, in generate_prompt
+    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 1031, in generate
+    return self._generate_helper(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 827, in _generate_helper
+    self._generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 470, in _generate
+    final_chunk = self._stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 429, in _stream_with_aggregation
+    for stream_resp in self._create_generate_stream(prompt, stop, **kwargs):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 373, in _create_generate_stream
+    yield from self._client.generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\ollama\_client.py", line 189, in inner
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed
+CUDA error (status code: 500)
+[2026-10-11 22:34:01,936] ERROR celery.app.trace 30196/22796 Task analytics.run_dataset_analysis[088bb3e6-fa99-4ed5-934b-60115d06fa1f] raised unexpected: ResponseError('llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed\nCUDA error')
+Traceback (most recent call last):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\celery\app\trace.py", line 585, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\tasks.py", line 73, in run_dataset_analysis
+    raw_code = llm.invoke(
+               ^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 384, in invoke
+    self.generate_prompt(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 801, in generate_prompt
+    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 1031, in generate
+    return self._generate_helper(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 827, in _generate_helper
+    self._generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 470, in _generate
+    final_chunk = self._stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 429, in _stream_with_aggregation
+    for stream_resp in self._create_generate_stream(prompt, stop, **kwargs):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 373, in _create_generate_stream
+    yield from self._client.generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\ollama\_client.py", line 189, in inner
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed
+CUDA error (status code: 500)
+[2026-10-11 22:34:01,942] INFO analytics.views 30196/22796 analysis.enqueued task=088bb3e6-fa99-4ed5-934b-60115d06fa1f dataset=11 user=2
+[11/Oct/2026 22:34:01] "POST /api/datasets/11/chat/ HTTP/1.1" 202 72
+[2026-10-11 22:34:02,134] ERROR analytics.views 30196/22796 analysis.status_failure task=088bb3e6-fa99-4ed5-934b-60115d06fa1f info=ResponseError('llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed\nCUDA error')
+[11/Oct/2026 22:34:02] "GET /api/tasks/088bb3e6-fa99-4ed5-934b-60115d06fa1f/ HTTP/1.1" 200 469
+[2026-10-11 22:35:34,145] INFO analytics.tasks 30196/22796 analysis.start task=6d92e8cc-ccb0-4150-a71b-3e961242c617 dataset=11 user=2 question='HOW MANY ROW'
+[2026-10-11 22:35:34,165] INFO analytics.tasks 30196/22796 analysis.data_loaded task=6d92e8cc-ccb0-4150-a71b-3e961242c617 rows=43 cols=1 elapsed=0.021s
+[2026-10-11 22:36:19,130] INFO httpx 30196/22796 HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+[2026-10-11 22:36:21,412] INFO analytics.tasks 30196/22796 analysis.code_generated task=6d92e8cc-ccb0-4150-a71b-3e961242c617 elapsed=47.245s
+[2026-10-11 22:36:21,589] ERROR analytics.tasks 30196/22796 analysis.rejected task=6d92e8cc-ccb0-4150-a71b-3e961242c617 dataset=11 code=execution_error error=Could not compute the answer: SyntaxError: invalid syntax elapsed=47.447s
+Traceback (most recent call last):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\analysis.py", line 108, in execute_code
+    exec(cleaned_code, {"__builtins__": SAFE_BUILTINS}, local_vars)
+  File "<string>", line 1
+    User: HOW MANY ROW 
+              ^^^^
+SyntaxError: invalid syntax
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\tasks.py", line 83, in run_dataset_analysis
+    result = execute_code(cleaned_code, df)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\analysis.py", line 113, in execute_code
+    raise AnalysisError(f"Could not compute the answer: {detail}", code="execution_error") from exc
+analytics.analysis.AnalysisError: Could not compute the answer: SyntaxError: invalid syntax
+[2026-10-11 22:36:21,616] INFO celery.app.trace 30196/22796 Task analytics.run_dataset_analysis[6d92e8cc-ccb0-4150-a71b-3e961242c617] succeeded in 47.46799999999348s: {'ok': False, 'user_id': 2, 'error': 'Could not compute the answer: SyntaxError: invalid syntax', 'code': 'execution_error'}
+[2026-10-11 22:36:21,632] INFO analytics.views 30196/22796 analysis.enqueued task=6d92e8cc-ccb0-4150-a71b-3e961242c617 dataset=11 user=2
+[11/Oct/2026 22:36:21] "POST /api/datasets/11/chat/ HTTP/1.1" 202 72
+[11/Oct/2026 22:36:21] "GET /api/tasks/6d92e8cc-ccb0-4150-a71b-3e961242c617/ HTTP/1.1" 200 182
+[11/Oct/2026 22:54:08] "POST /api/auth/login/ HTTP/1.1" 200 489
+[11/Oct/2026 22:54:08] "GET /api/datasets/ HTTP/1.1" 200 50
+[2026-10-11 22:57:25,427] INFO analytics.views 30196/9596 dataset.uploaded dataset=12 user=2 file=real_sales.csv
+[11/Oct/2026 22:57:25] "POST /api/datasets/ HTTP/1.1" 201 77
+[11/Oct/2026 22:57:25] "GET /api/datasets/ HTTP/1.1" 200 88
+[2026-10-11 22:57:38,458] INFO analytics.tasks 30196/9596 analysis.start task=2485ac70-9f1a-4a1b-941f-92d9eaa6397f dataset=12 user=2 question='how many row'
+[2026-10-11 22:57:38,566] INFO analytics.tasks 30196/9596 analysis.data_loaded task=2485ac70-9f1a-4a1b-941f-92d9eaa6397f rows=3 cols=3 elapsed=0.063s
+[2026-10-11 22:58:04,093] INFO httpx 30196/9596 HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 500 Internal Server Error"
+[2026-10-11 22:58:04,123] ERROR analytics.tasks 30196/9596 analysis.crashed task=2485ac70-9f1a-4a1b-941f-92d9eaa6397f dataset=12 error=llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed
+CUDA error (status code: 500) elapsed=25.665s
+Traceback (most recent call last):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\tasks.py", line 73, in run_dataset_analysis
+    raw_code = llm.invoke(
+               ^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 384, in invoke
+    self.generate_prompt(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 801, in generate_prompt
+    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 1031, in generate
+    return self._generate_helper(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 827, in _generate_helper
+    self._generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 470, in _generate
+    final_chunk = self._stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 429, in _stream_with_aggregation
+    for stream_resp in self._create_generate_stream(prompt, stop, **kwargs):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 373, in _create_generate_stream
+    yield from self._client.generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\ollama\_client.py", line 189, in inner
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed
+CUDA error (status code: 500)
+[2026-10-11 22:58:04,195] ERROR celery.app.trace 30196/9596 Task analytics.run_dataset_analysis[2485ac70-9f1a-4a1b-941f-92d9eaa6397f] raised unexpected: ResponseError('llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed\nCUDA error')
+Traceback (most recent call last):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\celery\app\trace.py", line 585, in trace_task
+    R = retval = fun(*args, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\analytics\tasks.py", line 73, in run_dataset_analysis
+    raw_code = llm.invoke(
+               ^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 384, in invoke
+    self.generate_prompt(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 801, in generate_prompt
+    return self.generate(prompt_strings, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 1031, in generate
+    return self._generate_helper(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_core\language_models\llms.py", line 827, in _generate_helper
+    self._generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 470, in _generate
+    final_chunk = self._stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 429, in _stream_with_aggregation
+    for stream_resp in self._create_generate_stream(prompt, stop, **kwargs):
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\langchain_ollama\llms.py", line 373, in _create_generate_stream
+    yield from self._client.generate(
+  File "C:\Users\91969\Desktop\zero_leak_analytics\.venv\Lib\site-packages\ollama\_client.py", line 189, in inner
+    raise ResponseError(e.response.text, e.response.status_code) from None
+ollama._types.ResponseError: llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed
+CUDA error (status code: 500)
+[2026-10-11 22:58:04,204] INFO analytics.views 30196/9596 analysis.enqueued task=2485ac70-9f1a-4a1b-941f-92d9eaa6397f dataset=12 user=2
+[11/Oct/2026 22:58:04] "POST /api/datasets/12/chat/ HTTP/1.1" 202 72
+[2026-10-11 22:58:04,334] ERROR analytics.views 30196/9596 analysis.status_failure task=2485ac70-9f1a-4a1b-941f-92d9eaa6397f info=ResponseError('llama-server process has terminated: exit status 0xc0000409: The system detected an overrun of a stack-based buffer in this application. This overrun could potentially allow a malicious user to gain control of this application.: CUDA error: shared object initialization failed\nCUDA error')
+[11/Oct/2026 22:58:04] "GET /api/tasks/2485ac70-9f1a-4a1b-941f-92d9eaa6397f/ HTTP/1.1" 200 469
+^C

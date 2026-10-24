@@ -1,0 +1,4 @@
+Watching for file changes with StatReloader
+[2026-10-11 22:20:54,541] INFO django.utils.autoreload 14980/13904 Watching for file changes with StatReloader
+[11/Oct/2026 22:20:55] "GET / HTTP/1.1" 200 793
+[11/Oct/2026 22:20:55,748] - Broken pipe from ('127.0.0.1', 60385)
